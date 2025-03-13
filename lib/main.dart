@@ -271,7 +271,7 @@ void main() async {
       win.size = initialSize;
       win.minSize = const Size(350, 650);
       win.alignment = Alignment.center;
-      win.title = "AIdea";
+      win.title = "Lu Ai";
 
       if (PlatformTool.isWindows()) {
         WidgetsBinding.instance.scheduleFrameCallback((timeStamp) {

@@ -229,7 +229,7 @@ tobias:
   url_scheme: alipay2021004101661425
 
 msix_config:
-  display_name: AIdea
+  display_name: Lu Ai
   publisher_display_name: Shenzhen Gulu Artificial Intelligence Technology Co., Ltd.
   identity_name: com.nexa.flutter.luai
   logo_path: assets/app.png
