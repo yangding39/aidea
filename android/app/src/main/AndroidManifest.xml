@@ -61,6 +61,9 @@
         <meta-data
             android:name="weChatAppId"
             android:value="wx52cc036cc770406d" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4191061050955756~2880641750"/>
     </application>
 
     <queries>

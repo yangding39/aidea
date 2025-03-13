@@ -128,6 +128,9 @@ import 'package:askaide/helper/http.dart' as httpx;
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:askaide/helper/ads_manager.dart';
+import 'package:askaide/page/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -138,7 +141,8 @@ void main() async {
   await PathHelper().init();
 
   FlutterError.onError = (FlutterErrorDetails details) {
-    if (details.library == 'rendering library' || details.library == 'image resource service') {
+    if (details.library == 'rendering library' ||
+        details.library == 'image resource service') {
       return;
     }
 
@@ -153,7 +157,9 @@ void main() async {
   if (kIsWeb) {
     databaseFactory = databaseFactoryFfiWeb;
   } else {
-    if (PlatformTool.isWindows() || PlatformTool.isLinux() || PlatformTool.isMacOS()) {
+    if (PlatformTool.isWindows() ||
+        PlatformTool.isLinux() ||
+        PlatformTool.isMacOS()) {
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
       var path = absolute(join(PathHelper().getHomePath, 'databases'));
@@ -197,7 +203,8 @@ void main() async {
     ChatHistoryProvider(db),
   );
 
-  final creativeIslandRepo = CreativeIslandRepository(CreativeIslandDataProvider(db));
+  final creativeIslandRepo =
+      CreativeIslandRepository(CreativeIslandDataProvider(db));
 
   // 聊天状态加载器
   final stateManager = MessageStateManager(cacheRepo);
@@ -301,7 +308,8 @@ class MyApp extends StatefulWidget {
     required this.creativeIslandRepo,
     required this.messageStateManager,
   }) {
-    chatRoomBloc = RoomBloc(chatMsgRepo: chatMsgRepo, stateManager: messageStateManager);
+    chatRoomBloc =
+        RoomBloc(chatMsgRepo: chatMsgRepo, stateManager: messageStateManager);
     accountBloc = AccountBloc(settingRepo);
     versionBloc = VersionBloc();
     galleryBloc = GalleryBloc();
@@ -310,9 +318,12 @@ class MyApp extends StatefulWidget {
     var apiServerToken = settingRepo.get(settingAPIServerToken);
     var usingGuestMode = settingRepo.boolDefault(settingUsingGuestMode, false);
 
-    final openAISelfHosted = settingRepo.boolDefault(settingOpenAISelfHosted, false);
-    final deepAISelfHosted = settingRepo.boolDefault(settingDeepAISelfHosted, false);
-    final stabilityAISelfHosted = settingRepo.boolDefault(settingStabilityAISelfHosted, false);
+    final openAISelfHosted =
+        settingRepo.boolDefault(settingOpenAISelfHosted, false);
+    final deepAISelfHosted =
+        settingRepo.boolDefault(settingDeepAISelfHosted, false);
+    final stabilityAISelfHosted =
+        settingRepo.boolDefault(settingStabilityAISelfHosted, false);
 
     final shouldLogin = (apiServerToken == null || apiServerToken == '') &&
         !usingGuestMode &&
@@ -321,12 +332,18 @@ class MyApp extends StatefulWidget {
         !stabilityAISelfHosted;
 
     _router = GoRouter(
-      initialLocation: shouldLogin ? '/login' : Ability().homeRoute,
+      initialLocation: '/splash',
       observers: [
         BotToastNavigatorObserver(),
       ],
       navigatorKey: _rootNavigatorKey,
       routes: [
+        GoRoute(
+          path: '/splash',
+          pageBuilder: (context, state) => NoTransitionPage(
+            child: SplashScreen(setting: settingRepo),
+          ),
+        ),
         ShellRoute(
           builder: (context, state, child) {
             return child;
@@ -342,7 +359,8 @@ class MyApp extends StatefulWidget {
                       BlocProvider.value(
                         value: ChatBlocManager().getBloc(
                           chatAnywhereRoomId,
-                          chatHistoryId: int.tryParse(state.queryParameters['chat_id'] ?? ''),
+                          chatHistoryId: int.tryParse(
+                              state.queryParameters['chat_id'] ?? ''),
                         ),
                       ),
                       BlocProvider(
@@ -356,8 +374,11 @@ class MyApp extends StatefulWidget {
                     child: NewHomePage(
                       settings: settingRepo,
                       stateManager: messageStateManager,
-                      showInitialDialog: state.queryParameters['show_initial_dialog'] == 'true',
-                      reward: int.tryParse(state.queryParameters['reward'] ?? '0'),
+                      showInitialDialog:
+                          state.queryParameters['show_initial_dialog'] ==
+                              'true',
+                      reward:
+                          int.tryParse(state.queryParameters['reward'] ?? '0'),
                     ),
                   ),
                 );
@@ -371,7 +392,8 @@ class MyApp extends StatefulWidget {
                   providers: [
                     BlocProvider.value(value: accountBloc),
                   ],
-                  child: SettingScreen(settings: context.read<SettingRepository>()),
+                  child: SettingScreen(
+                      settings: context.read<SettingRepository>()),
                 ),
               ),
             ),
@@ -381,7 +403,9 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                    BlocProvider(
+                        create: (context) =>
+                            CreativeIslandBloc(creativeIslandRepo)),
                   ],
                   child: DrawListScreen(
                     setting: settingRepo,
@@ -417,7 +441,8 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => ChatChatBloc(chatMsgRepo)),
+                    BlocProvider(
+                        create: (context) => ChatChatBloc(chatMsgRepo)),
                   ],
                   child: HomePage(setting: settingRepo),
                 ),
@@ -493,7 +518,8 @@ class MyApp extends StatefulWidget {
                     BlocProvider.value(
                       value: ChatBlocManager().getBloc(
                         chatAnywhereRoomId,
-                        chatHistoryId: int.tryParse(state.queryParameters['chat_id'] ?? ''),
+                        chatHistoryId: int.tryParse(
+                            state.queryParameters['chat_id'] ?? ''),
                       ),
                     ),
                     BlocProvider.value(value: chatRoomBloc),
@@ -502,10 +528,15 @@ class MyApp extends StatefulWidget {
                   child: HomeChatPage(
                     stateManager: messageStateManager,
                     setting: settingRepo,
-                    chatId: int.tryParse(state.queryParameters['chat_id'] ?? '0'),
+                    chatId:
+                        int.tryParse(state.queryParameters['chat_id'] ?? '0'),
                     initialMessage: state.queryParameters['init_message'],
-                    model: state.queryParameters['model'] == '' ? null : state.queryParameters['model'],
-                    title: state.queryParameters['title'] == '' ? null : state.queryParameters['title'],
+                    model: state.queryParameters['model'] == ''
+                        ? null
+                        : state.queryParameters['model'],
+                    title: state.queryParameters['title'] == ''
+                        ? null
+                        : state.queryParameters['title'],
                   ),
                 ),
               ),
@@ -517,7 +548,8 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => ChatChatBloc(chatMsgRepo)),
+                    BlocProvider(
+                        create: (context) => ChatChatBloc(chatMsgRepo)),
                   ],
                   child: HomeChatHistoryPage(
                     setting: settingRepo,
@@ -585,7 +617,8 @@ class MyApp extends StatefulWidget {
                         value: ChatBlocManager().getBloc(roomId),
                       ),
                     ],
-                    child: CharacterEditPage(roomId: roomId, setting: settingRepo),
+                    child:
+                        CharacterEditPage(roomId: roomId, setting: settingRepo),
                   ),
                 );
               },
@@ -611,9 +644,12 @@ class MyApp extends StatefulWidget {
                 MultiBlocProvider(
                   providers: [
                     BlocProvider.value(value: accountBloc),
-                    BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                    BlocProvider(
+                        create: (context) =>
+                            CreativeIslandBloc(creativeIslandRepo)),
                   ],
-                  child: UserCenterScreen(settings: context.read<SettingRepository>()),
+                  child: UserCenterScreen(
+                      settings: context.read<SettingRepository>()),
                 ),
               ),
             ),
@@ -645,7 +681,9 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                    BlocProvider(
+                        create: (context) =>
+                            CreativeIslandBloc(creativeIslandRepo)),
                   ],
                   child: ImageEditDirectScreen(
                     setting: settingRepo,
@@ -664,7 +702,9 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                    BlocProvider(
+                        create: (context) =>
+                            CreativeIslandBloc(creativeIslandRepo)),
                   ],
                   child: ImageEditDirectScreen(
                     setting: settingRepo,
@@ -683,7 +723,9 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [
-                    BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                    BlocProvider(
+                        create: (context) =>
+                            CreativeIslandBloc(creativeIslandRepo)),
                   ],
                   child: ImageEditDirectScreen(
                     setting: settingRepo,
@@ -778,7 +820,9 @@ class MyApp extends StatefulWidget {
                 return transitionResolver(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                      BlocProvider(
+                          create: (context) =>
+                              CreativeIslandBloc(creativeIslandRepo)),
                     ],
                     child: MyCreationScreen(
                       setting: settingRepo,
@@ -795,7 +839,9 @@ class MyApp extends StatefulWidget {
                 return transitionResolver(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                      BlocProvider(
+                          create: (context) =>
+                              CreativeIslandBloc(creativeIslandRepo)),
                     ],
                     child: CreativeModelScreen(setting: settingRepo),
                   ),
@@ -808,11 +854,14 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) {
                 final id = state.pathParameters['id']!;
                 final itemId = int.tryParse(state.pathParameters['item_id']!);
-                final showErrorMessage = state.queryParameters['show_error'] == 'true';
+                final showErrorMessage =
+                    state.queryParameters['show_error'] == 'true';
                 return transitionResolver(
                   MultiBlocProvider(
                     providers: [
-                      BlocProvider(create: (context) => CreativeIslandBloc(creativeIslandRepo)),
+                      BlocProvider(
+                          create: (context) =>
+                              CreativeIslandBloc(creativeIslandRepo)),
                     ],
                     child: MyCreationItemPage(
                       setting: settingRepo,
@@ -844,7 +893,8 @@ class MyApp extends StatefulWidget {
               pageBuilder: (context, state) => transitionResolver(
                 QuotaUsageDetailScreen(
                   setting: settingRepo,
-                  date: state.queryParameters['date'] ?? DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                  date: state.queryParameters['date'] ??
+                      DateFormat('yyyy-MM-dd').format(DateTime.now()),
                 ),
               ),
             ),
@@ -921,7 +971,8 @@ class MyApp extends StatefulWidget {
                   MultiBlocProvider(
                     providers: [
                       BlocProvider(
-                        create: ((context) => GroupChatBloc(stateManager: messageStateManager)),
+                        create: ((context) =>
+                            GroupChatBloc(stateManager: messageStateManager)),
                       ),
                       BlocProvider.value(value: chatRoomBloc),
                     ],
@@ -942,7 +993,8 @@ class MyApp extends StatefulWidget {
                   MultiBlocProvider(
                     providers: [
                       BlocProvider(
-                        create: ((context) => GroupChatBloc(stateManager: messageStateManager)),
+                        create: ((context) =>
+                            GroupChatBloc(stateManager: messageStateManager)),
                       ),
                       BlocProvider.value(value: chatRoomBloc),
                     ],
@@ -959,7 +1011,8 @@ class MyApp extends StatefulWidget {
                   MultiBlocProvider(
                     providers: [
                       BlocProvider(
-                        create: ((context) => GroupChatBloc(stateManager: messageStateManager)),
+                        create: ((context) =>
+                            GroupChatBloc(stateManager: messageStateManager)),
                       ),
                       BlocProvider.value(value: chatRoomBloc),
                     ],
@@ -1028,7 +1081,8 @@ class MyApp extends StatefulWidget {
                   paymentIntent: state.queryParameters['intent']!,
                   price: state.queryParameters['price']!,
                   publishableKey: state.queryParameters['key']!,
-                  finishAction: state.queryParameters['finish_action'] ?? 'close',
+                  finishAction:
+                      state.queryParameters['finish_action'] ?? 'close',
                 ));
               },
             ),
@@ -1323,14 +1377,19 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<ChatMessageRepository>(create: (context) => widget.chatMsgRepo),
-        RepositoryProvider<OpenAIRepository>(create: (context) => widget.openAIRepo),
-        RepositoryProvider<SettingRepository>(create: (context) => widget.settingRepo),
-        RepositoryProvider<CacheRepository>(create: (context) => widget.cacheRepo),
+        RepositoryProvider<ChatMessageRepository>(
+            create: (context) => widget.chatMsgRepo),
+        RepositoryProvider<OpenAIRepository>(
+            create: (context) => widget.openAIRepo),
+        RepositoryProvider<SettingRepository>(
+            create: (context) => widget.settingRepo),
+        RepositoryProvider<CacheRepository>(
+            create: (context) => widget.cacheRepo),
       ],
       child: ChangeNotifierProvider(
           create: (context) => AppTheme.get()
-            ..mode = AppTheme.themeModeFormString(widget.settingRepo.stringDefault(settingThemeMode, 'system')),
+            ..mode = AppTheme.themeModeFormString(
+                widget.settingRepo.stringDefault(settingThemeMode, 'system')),
           builder: (context, _) {
             final appTheme = context.watch<AppTheme>();
             return Sizer(
@@ -1344,24 +1403,27 @@ class _MyAppState extends State<MyApp> {
                   builder: (context, child) {
                     // 这里设置了全局字体固定大小，不随系统设置变更
                     return MediaQuery(
-                      data: MediaQuery.of(context)
-                          .copyWith(textScaler: TextScaler.linear(PlatformTool.isDesktop() ? 0.95 : 1)),
+                      data: MediaQuery.of(context).copyWith(
+                          textScaler: TextScaler.linear(
+                              PlatformTool.isDesktop() ? 0.95 : 1)),
                       child: BotToastInit()(context, child),
                     );
                   },
                   routerConfig: widget._router,
                   supportedLocales: widget.localization.supportedLocales,
-                  localizationsDelegates: widget.localization.localizationsDelegates,
-                  scrollBehavior: PlatformTool.isAndroid() || PlatformTool.isIOS()
-                      ? null
-                      : const MaterialScrollBehavior().copyWith(
-                          dragDevices: {
-                            PointerDeviceKind.touch,
-                            PointerDeviceKind.mouse,
-                            PointerDeviceKind.stylus,
-                            PointerDeviceKind.trackpad,
-                          },
-                        ),
+                  localizationsDelegates:
+                      widget.localization.localizationsDelegates,
+                  scrollBehavior:
+                      PlatformTool.isAndroid() || PlatformTool.isIOS()
+                          ? null
+                          : const MaterialScrollBehavior().copyWith(
+                              dragDevices: {
+                                PointerDeviceKind.touch,
+                                PointerDeviceKind.mouse,
+                                PointerDeviceKind.stylus,
+                                PointerDeviceKind.trackpad,
+                              },
+                            ),
                 );
               },
             );
@@ -1396,7 +1458,8 @@ ThemeData createLightThemeData() {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: const Color.fromARGB(255, 9, 185, 85), // This is a custom color variable
+        foregroundColor: const Color.fromARGB(
+            255, 9, 185, 85), // This is a custom color variable
       ),
     ),
   );
@@ -1428,7 +1491,8 @@ ThemeData createDarkThemeData() {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: const Color.fromARGB(255, 9, 185, 85), // This is a custom color variable
+        foregroundColor: const Color.fromARGB(
+            255, 9, 185, 85), // This is a custom color variable
       ),
     ),
   );
