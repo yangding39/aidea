@@ -231,6 +231,6 @@ tobias:
 msix_config:
   display_name: AIdea
   publisher_display_name: Shenzhen Gulu Artificial Intelligence Technology Co., Ltd.
-  identity_name: cc.aicode.flutter.askaide.askaide
+  identity_name: com.nexa.flutter.luai
   logo_path: assets/app.png
   execution_alias: AIdea

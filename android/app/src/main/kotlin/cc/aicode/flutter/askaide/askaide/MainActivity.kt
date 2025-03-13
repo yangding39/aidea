@@ -1,4 +1,4 @@
-package cc.aicode.flutter.askaide.askaide
+package com.nexa.flutter.luai
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
