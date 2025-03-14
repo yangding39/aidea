@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'dart:async';
 import 'package:askaide/helper/constant.dart';
 import 'package:askaide/repo/settings_repo.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:askaide/lang/lang.dart';
 
 class SplashScreen extends StatefulWidget {
   final SettingRepository setting;
@@ -106,7 +108,8 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: _enterApp,
-              child: Text('进入应用 ($_countdown)'),
+              child: Text(
+                  '${AppLocale.enterApp.getString(context)} ($_countdown)'),
             ),
           ],
         ),

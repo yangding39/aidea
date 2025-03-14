@@ -124,7 +124,8 @@ mixin AppLocale {
 
   static const String nameRequiredMessage = 'name-required-message';
   static const String modelRequiredMessage = 'model-required-message';
-  static const String charactorPromptRequiredMessage = 'charactor-prompt-required-message';
+  static const String charactorPromptRequiredMessage =
+      'charactor-prompt-required-message';
 
   static const String writeYourIdeas = 'write-your-ideas';
   static const String describeYourImages = 'describe-your-images';
@@ -146,7 +147,8 @@ mixin AppLocale {
   static const String generating = 'generating';
   static const String generateExitConfirm = 'generate-exit-confirm';
   static const String tooManyRequests = 'too-many-requests';
-  static const String tooManyRequestsOrPaymentRequired = 'too-many-requests-or-payment-required';
+  static const String tooManyRequestsOrPaymentRequired =
+      'too-many-requests-or-payment-required';
   static const String promptHint = 'prompt-hint';
   static const String confirmClearCache = 'confirm-clear-cache';
   static const String confirmSignOut = 'confirm-sign-out';
@@ -167,7 +169,8 @@ mixin AppLocale {
   static const String referenceImage = 'reference-image';
   static const String selectImage = 'select-image';
   static const String imagination = 'imagination';
-  static const String keywordsSeparatedByCommas = 'keywords-separated-by-commas';
+  static const String keywordsSeparatedByCommas =
+      'keywords-separated-by-commas';
   static const String originalImage = 'original-image';
   static const String superResolution = 'super-resolution';
   static const String colorizeImage = 'colorize-image';
@@ -175,7 +178,8 @@ mixin AppLocale {
   static const String report = 'report';
   static const String latestVersion = 'latest-version';
   static const String aIdeaApp = 'aidea-app';
-  static const String onceEnabledSmartOptimization = 'once-enabled-smart-optimization';
+  static const String onceEnabledSmartOptimization =
+      'once-enabled-smart-optimization';
   static const String gotIt = 'got-it';
   static const String referenceImageNote = 'reference-image-note';
   static const String selectReferenceImage = 'select-reference-image';
@@ -214,7 +218,8 @@ mixin AppLocale {
   static const String verifyCodeFormatError = 'verify-code-format-error';
   static const String phone = 'phone';
   static const String email = 'email';
-  static const String directSigninDueHasAccount = 'direct-signin-due-has-account';
+  static const String directSigninDueHasAccount =
+      'direct-signin-due-has-account';
   static const String directSignin = 'direct-signin-due-no-account';
   static const String passwordResetOK = 'password-reset-ok';
   static const String resetPassword = 'reset-password';
@@ -336,7 +341,8 @@ mixin AppLocale {
 
   static const String modelNeedSignIn = 'model-need-sign-in';
   static const String wechatBindConfirm = 'wechat-bind-confirm';
-  static const String accountWillBeCreateAutomatically = 'account-will-be-create-automatically';
+  static const String accountWillBeCreateAutomatically =
+      'account-will-be-create-automatically';
   static const String installWechatFirst = 'install-wechat-first';
   static const String otherLoginMethods = 'other-login-methods';
   static const String verifyAccount = 'verify-account';
@@ -351,7 +357,7 @@ mixin AppLocale {
   static const String updateApp = 'update-app';
   static const String notUpdateApp = 'not-update-app';
   static const String searchedXWebPages = 'searched-x-web-pages';
-
+  static const String enterApp = 'Enter App';
   static const Map<String, dynamic> zh = {
     wechat: '微信',
     required: '必填',
@@ -493,7 +499,8 @@ mixin AppLocale {
     generating: '创作中...',
     generateExitConfirm: '创作中...\n退出后，可在历史记录中查看结果',
     tooManyRequests: '操作过于频繁，请稍后再试',
-    tooManyRequestsOrPaymentRequired: '操作过于频繁（如果您使用了自定义的 OpenAI Keys，请登录 https://platform.openai.com 检查账户余额是否充足）',
+    tooManyRequestsOrPaymentRequired:
+        '操作过于频繁（如果您使用了自定义的 OpenAI Keys，请登录 https://platform.openai.com 检查账户余额是否充足）',
     promptHint: '设定角色和技能，以便为你提供更精准有效的信息。',
     confirmClearCache: '确定要清除缓存吗？',
     confirmSignOut: '确定要退出登录吗？',
@@ -685,6 +692,7 @@ mixin AppLocale {
     updateApp: '去更新',
     notUpdateApp: '暂不更新',
     searchedXWebPages: '已搜索到 %s 个网页',
+    enterApp: '进入应用',
   };
 
   static const Map<String, dynamic> en = {
@@ -727,7 +735,8 @@ mixin AppLocale {
     robotIsThinkingMessage: 'Thinking...',
     thinkingProcess: 'Deep thought',
     robotIsSearchingMessage: 'Searching',
-    robotHasSomeError: 'There seems to be something wrong, Do you want to resend the message?',
+    robotHasSomeError:
+        'There seems to be something wrong, Do you want to resend the message?',
     appName: 'AIdea',
     chatAnywhere: 'Chat',
     homeTitle: 'Characters',
@@ -806,8 +815,10 @@ mixin AppLocale {
     modelNotValid: 'The current model is not open',
     signInRequired: 'You are not logged in, please log in first',
     accountNeedReSignin: 'Account exception, please log in again',
-    openAIAuthFailed: 'You have enabled custom OpenAI service, please check if the API Key is correct',
-    modelNotFound: 'The current model is not enabled yet, please try again later',
+    openAIAuthFailed:
+        'You have enabled custom OpenAI service, please check if the API Key is correct',
+    modelNotFound:
+        'The current model is not enabled yet, please try again later',
     confirmToDeleteRoom: 'Confirm to delete the character?',
     writeYourIdeas: 'Your ideas',
     describeYourImages: 'Your ideas',
@@ -827,7 +838,8 @@ mixin AppLocale {
     generateResult: 'Generate result',
     generateFailed: 'Creation failed',
     generating: 'Generating...',
-    generateExitConfirm: 'Generating...\nYou can view the result in the history',
+    generateExitConfirm:
+        'Generating...\nYou can view the result in the history',
     tooManyRequests: 'Too many requests, please try again later',
     tooManyRequestsOrPaymentRequired:
         'Too many requests (If you are using your own OpenAI Keys, please log in to https://platform.openai.com to check if your account balance is sufficient)',
@@ -853,17 +865,21 @@ mixin AppLocale {
     referenceImage: 'Reference Image',
     selectImage: 'Select Image',
     imagination: 'Imagination',
-    keywordsSeparatedByCommas: 'Keywords of the scene you imagine, separated by commas',
+    keywordsSeparatedByCommas:
+        'Keywords of the scene you imagine, separated by commas',
     originalImage: 'Original Image',
     superResolution: 'Super-Resolution',
     colorizeImage: 'Colorize Image',
     errorLog: 'Error Log',
     report: 'Report',
     latestVersion: 'You are currently on the latest version',
-    aIdeaApp: 'AIdea is an app that allows you to converse with AI, and the app code is completely open source.',
-    onceEnabledSmartOptimization: 'Smart Optimization\n\nOnce enabled, AI will further refine and optimize your ideas.',
+    aIdeaApp:
+        'AIdea is an app that allows you to converse with AI, and the app code is completely open source.',
+    onceEnabledSmartOptimization:
+        'Smart Optimization\n\nOnce enabled, AI will further refine and optimize your ideas.',
     gotIt: 'Got it',
-    referenceImageNote: 'Reference Image\n\nAI will create based on the reference image provided.',
+    referenceImageNote:
+        'Reference Image\n\nAI will create based on the reference image provided.',
     selectReferenceImage: 'Please select a reference image',
     random: 'Random',
     followSystem: 'Follow System',
@@ -878,14 +894,17 @@ mixin AppLocale {
     accountInputTips: 'Phone number or email',
     phoneInputTips: 'Phone number',
     passwordInputTips: 'Password',
-    pleaseReadAgreeProtocol: 'Please read and agree to the user agreement and privacy policy first',
+    pleaseReadAgreeProtocol:
+        'Please read and agree to the user agreement and privacy policy first',
     signInSuccess: 'Sign in success',
     signInFailed: 'Sign in failed',
     accountRequired: 'Please enter your account',
-    accountFormatError: 'Account format error\nPlease enter your phone number or email',
+    accountFormatError:
+        'Account format error\nPlease enter your phone number or email',
     phoneNumberFormatError: 'Phone number format error',
     passwordRequired: 'Please enter your password',
-    passwordFormatError: 'Password format error\nMust be 8-20 digits, letters, special characters',
+    passwordFormatError:
+        'Password format error\nMust be 8-20 digits, letters, special characters',
     accountCreated: 'Account created',
     sendVerifyCode: 'Send',
     verify: 'Verify',
@@ -908,12 +927,14 @@ mixin AppLocale {
     bindExAccount: 'Bind existing account',
     unbind: 'Unbind',
     inviteCode: 'Invite code',
-    inviteCodeInputTips: 'Enter friend invite code, get extra rewards (optional)',
+    inviteCodeInputTips:
+        'Enter friend invite code, get extra rewards (optional)',
     inviteCodeFormatError: 'Invite code format error',
     enableCustomOpenAI: 'Your custom OpenAI service will be used once enabled',
     me: 'Me',
     creditsUsage: 'Usage',
-    creditUsageTips: 'Usage details will be updated the next day, showing usage in the last 30 days.',
+    creditUsageTips:
+        'Usage details will be updated the next day, showing usage in the last 30 days.',
     updateCheck: 'Check Update',
     buy: 'Buy',
     paymentHistory: 'Histories',
@@ -959,7 +980,8 @@ mixin AppLocale {
     advanced: 'More Options',
     collapseOptions: 'Collapse',
     welcomeMessage: 'Welcome Message',
-    welcomeMessageTips: 'The system will automatically send a welcome message each time a new chat is started.',
+    welcomeMessageTips:
+        'The system will automatically send a welcome message each time a new chat is started.',
     memoryDepth: 'Memory Depth',
     robotRecommand: 'Recommand',
     pickYourRobot: 'Pick your robot',
@@ -978,7 +1000,8 @@ mixin AppLocale {
     showInviteCode: 'Show Invite Code',
     dontShowInviteCode: 'Don\'t Show Invite Code',
     inviteNow: 'Invite Now',
-    inviteSlogan: 'Invite friends to register, both parties will receive rewards',
+    inviteSlogan:
+        'Invite friends to register, both parties will receive rewards',
     preview: 'Preview',
     download: 'Download',
     clickSwitchImage: 'Click to switch image',
@@ -1017,7 +1040,8 @@ mixin AppLocale {
     verifyAccount: 'Verify Account',
     enterPasswordToSignin: 'Please enter the password to sign in.',
     verifyCodeLogin: 'Use Verify Code',
-    verifyCodeLoginTips: 'Please enter the verify code to complete the operation.',
+    verifyCodeLoginTips:
+        'Please enter the verify code to complete the operation.',
     usePasswordToSignin: 'Use Password',
     referenceDocuments: 'Reference Documents',
     welcomeToAskMe: 'How can I help you today?',
@@ -1025,6 +1049,7 @@ mixin AppLocale {
     updateApp: 'Update Now',
     notUpdateApp: 'Not Update',
     searchedXWebPages: 'Searched %s web pages',
+    enterApp: 'Enter App',
   };
 }
 
